@@ -1,5 +1,9 @@
 /* Font Family */
-.space-mono {
-    font-family: "Space Mono", monospace;
+.space-grotesk {
+    font-family: "Space Grotesk", sans-serif;
 
+}
+
+#transaction-area {
+    display: none;
 }

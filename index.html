@@ -1,19 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="business">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chichago Bank</title>
-    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Font Family -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- CSS File Added -->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Tailwind CSS and Daisy Ui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
 </head>
 
-<body class="space-mono">
+<body class="space-grotesk">
     <header>
+        <!-- Login Form -->
+        <div id="login-area">
+            <h1
+                class="text-6xl font-extrabold text-center mt-20 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-yellow-700 to-orange-700">
+                Welcome
+                to Bank Chichago</h1>
+
+            <div id="submit-area"
+                class="w-[80%] mx-auto border border-x-orange-500 border-y-orange-700 py-10 px-20 mt-10 rounded-xl shadow-2xl">
+                <h3 class="text-3xl font-bold text-orange-600 mb-5">Login</h3>
+                <input class="mb-5 border border-x-orange-700 border-y-orange-500 p-5 w-[90%] rounded-lg" type="email"
+                    placeholder="Enter Your Email" class="input input-bordered w-full max-w-xs" /> <br>
+
+                <input class="mb-5 border border-x-orange-700 border-y-orange-500 p-5 w-[90%] rounded-lg"
+                    type="password" placeholder="Enter Your Password" class="input input-bordered w-full max-w-xs" />
+                <br>
+                <button id="btn" class="btn btn-accent btn-outline text-l rounded-lg">Login</button>
+            </div>
+        </div>
+
+        <!-- Transaction Area -->
+        <div id="transaction-area" class="px-20">
+            <h2
+                class="text-6xl font-extrabold text-center mt-20 text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-700 to-orange-900">
+                Transaction Area</h2>
+
+            <div class="grid grid-cols-3 gap-10 mt-20 px-10">
+
+                <div class="card1 bg-gradient-to-r from-red-900 to-orange-700 rounded-xl shadow-xl p-10">
+                    <h3 class="text-5xl font-bold mb-2">Deposite</h3>
+                    <h1 class="text-4xl font-extrabold">$ <span id="current-deposite">00</span></h1>
+                </div>
+
+                <div class="card2 bg-gradient-to-r from-cyan-900 to-purple-500 rounded-xl shadow-xl p-10">
+                    <h3 class="text-5xl font-bold mb-2">Withdraw</h3>
+                    <h1 class="text-4xl font-extrabold">$<span id="current-witdraw">00</span> </h1>
+                </div>
+
+                <div
+                    class="card3 bg-gradient-to-r from-black to-blue-900 bg-opacity-70 backdrop-blur-2xl  rounded-xl text-whiterounded-xl shadow-xl p-10">
+                    <h3 class="text-5xl font-bold mb-2">Balance</h3>
+                    <h1 class="text-4xl font-extrabold">$<span id="balance-amount">1240</span> </h1>
+                </div>
+            </div>
+
+            <!-- Deposite & Withdraw -->
+            <div class="grid grid-cols-2 gap-20">
+
+                <!-- Deposite -->
+                <div class="border border-x-orange-500 border-y-orange-700 py-10 px-20 mt-10 rounded-xl shadow-2xl">
+                    <h3 class="text-3xl font-bold text-orange-600 mb-5">Deposite</h3>
+                    <input id="deposite-amount" type="text" placeholder="$ Amount You want to deposite"
+                        class="input input-bordered max-w-xs mb-5 border border-x-orange-700 border-y-orange-500 p-5 w-full rounded-lg" />
+                    <br>
+                    <button id="btn-deposite" class="btn btn-accent btn-outline text-l rounded-lg">Deposite</button>
+                </div>
+
+                <!-- Withdraw -->
+                <div class="border border-x-orange-500 border-y-orange-700 py-10 px-20 mt-10 rounded-xl shadow-2xl">
+                    <h3 class="text-3xl font-bold text-orange-600 mb-5">Withdraw</h3>
+                    <input id="withdraw-amaount" type="text" placeholder="$ Amount You want to deposite"
+                        class="input input-bordered max-w-xs mb-5 border border-x-orange-700 border-y-orange-500 p-5 w-full rounded-lg" />
+                    <br>
+                    <button id="btn-withdraw" class="btn btn-accent btn-outline text-l rounded-lg">Withdraw</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
+
+        <script>
+            //Deposite Button Event Handler
+            let depositeBtn = document.getElementById('btn-deposite')
+            depositeBtn.addEventListener('click', function () {
+
+                let depositeAmount = document.getElementById('deposite-amount').value;
+                let depositeNumber = parseFloat(depositeAmount);
+
+                let currentDeposite = document.getElementById('current-deposite').innerText
+                let currentDepositeNumber = parseFloat(currentDeposite);
+
+                let totalDeposit = depositeNumber + currentDepositeNumber;
+
+                document.getElementById('current-deposite').innerText = totalDeposit;
+
+                document.getElementById('deposite-amount').value = ''
+
+                let balanceAmount = document.getElementById('balance-amount').innerText
+                let balanceAmountNumber = parseFloat(balanceAmount);
+
+                let totalBalance = balanceAmountNumber + totalDeposit
+
+                document.getElementById('balance-amount').innerText = totalBalance
+
+            })
+
+
+            //Withdraw Button Event Handler
+            let withdrawBtn = document.getElementById('btn-withdraw')
+            withdrawBtn.addEventListener('click', function () {
+
+                let withdrawAmount = document.getElementById("withdraw-amaount").value
+                let withdrawNumber = parseFloat(withdrawAmount);
+
+
+                let currentWithdraw = document.getElementById("current-witdraw").innerText
+                let currentWithdrawNumber = parseFloat(currentWithdraw);
+
+
+
+                document.getElementById("current-witdraw").innerText = withdrawNumber
+
+                let balanceAmount = document.getElementById('balance-amount').innerText
+                let balanceAmountNumber = parseFloat(balanceAmount);
+
+                let totalBalanceNumber = balanceAmountNumber - currentWithdrawNumber
+
+                document.getElementById('balance-amount').innerText = totalBalanceNumber
+
+
+            })
+
+
+
+        </script>
 
     </header>
 
